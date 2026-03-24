@@ -1,5 +1,5 @@
 ---
-name: dual-code
+name: code
 description: Claude-Codex 코드 리뷰 토론. sonnet이 루프 오케스트레이션 + 코드 수정, findings 판단은 opus sub-agent에 위임. 자연어로 호출.
 model: sonnet
 tools:

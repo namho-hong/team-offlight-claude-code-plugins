@@ -1,5 +1,5 @@
 ---
-name: dual-plan
+name: plan
 description: Claude-Codex 계획 토론. 기존 플랜 파일을 Codex가 리뷰, Claude가 수정/반박. 합의까지 반복 (최대 10회).
 argument-hint: "[plan-file.md] (생략 시 최신 플랜에서 선택)"
 allowed-tools: Task, Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion

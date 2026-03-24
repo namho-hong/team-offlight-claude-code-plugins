@@ -1,8 +1,8 @@
 ---
-name: dual-search
+name: search
 description: |
   Cross-model fact verification using Claude + Codex in parallel with convergence loop.
-  Trigger: "/dual-search", "dual search", "교차 검증", "cross verify",
+  Trigger: "/dual:search", "dual search", "교차 검증", "cross verify",
   "팩트체크", "fact check", "이거 맞아?", "진짜야?",
   "두 모델로 확인해줘", "codex랑 비교해줘"
 allowed-tools:

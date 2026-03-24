@@ -1,0 +1,12 @@
+{
+  "name": "dual",
+  "version": "1.0.0",
+  "description": "Multi-model collaboration tools — Claude + Codex for fact verification, plan review, and code review",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT",
+  "keywords": ["claude-code", "plugin", "codex", "multi-model", "fact-check", "plan-review", "code-review"]
+}
