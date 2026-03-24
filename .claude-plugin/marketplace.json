@@ -30,6 +30,11 @@
       "name": "my-knowledge-base",
       "description": "Compound your knowledge across sessions — tracks what you know, what you're learning, with verified assessments",
       "source": "./plugins/my-knowledge-base"
+    },
+    {
+      "name": "create-extension",
+      "description": "Guide for creating Claude Code extensions (skills, hooks, agents) in the right location",
+      "source": "./plugins/create-extension"
     }
   ]
 }

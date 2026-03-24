@@ -1,0 +1,12 @@
+{
+  "name": "create-extension",
+  "version": "1.0.0",
+  "description": "Guide for creating Claude Code extensions (skills, hooks, agents) in the right location",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT",
+  "keywords": ["claude-code", "plugin", "skill", "hook", "agent", "scaffolding"]
+}
