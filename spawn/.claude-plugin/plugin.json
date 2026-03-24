@@ -1,0 +1,12 @@
+{
+  "name": "spawn",
+  "version": "1.0.0",
+  "description": "Spawn a new Claude Code session in a Warp terminal tab",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT",
+  "keywords": ["claude-code", "plugin", "warp", "terminal", "session", "spawn"]
+}

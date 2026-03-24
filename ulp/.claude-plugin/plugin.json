@@ -1,0 +1,12 @@
+{
+  "name": "ulp",
+  "version": "1.0.0",
+  "description": "Ultimate Loop Planning - 6-stage critique-based loop for thorough plan generation",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT",
+  "keywords": ["claude-code", "plugin", "planning", "critique-loop", "architecture"]
+}
