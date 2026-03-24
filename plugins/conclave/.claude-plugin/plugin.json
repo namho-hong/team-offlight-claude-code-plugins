@@ -1,0 +1,12 @@
+{
+  "name": "conclave",
+  "version": "1.0.0",
+  "description": "Conclave app integration — hooks and skills for syncing tasks, plans, and prompts with the Conclave desktop app",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT",
+  "keywords": ["claude-code", "plugin", "conclave", "sync", "task-management", "mcp"]
+}

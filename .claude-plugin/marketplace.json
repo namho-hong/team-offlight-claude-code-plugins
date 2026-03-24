@@ -25,6 +25,11 @@
       "name": "session-commit",
       "description": "Commit only files changed in the current session — no git diff/status needed",
       "source": "./plugins/session-commit"
+    },
+    {
+      "name": "conclave",
+      "description": "Conclave app integration — syncs tasks, plans, and prompts with the Conclave desktop app",
+      "source": "./plugins/conclave"
     }
   ]
 }
