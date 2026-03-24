@@ -25,6 +25,11 @@
       "name": "session-commit",
       "description": "Commit only files changed in the current session — no git diff/status needed",
       "source": "./plugins/session-commit"
+    },
+    {
+      "name": "my-knowledge-base",
+      "description": "Compound your knowledge across sessions — tracks what you know, what you're learning, with verified assessments",
+      "source": "./plugins/my-knowledge-base"
     }
   ]
 }

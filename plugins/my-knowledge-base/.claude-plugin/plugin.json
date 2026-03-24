@@ -1,0 +1,11 @@
+{
+  "name": "my-knowledge-base",
+  "version": "0.0.3",
+  "description": "My Knowledge Base for Claude Code — compound your knowledge across sessions. Tracks what you know, what you're unsure about, and what you don't know, with verified assessments and timeline history.",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT"
+}
