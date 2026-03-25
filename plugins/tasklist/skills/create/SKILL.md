@@ -23,8 +23,8 @@ user-invocable: true
 | `category` | string | 분류 | `finance`, `legal`, `meeting`, `dev` |
 
 메타데이터는 선택 사항. 사용자가 언급하지 않으면 생략한다.
-단, 문맥에서 추론 가능하면 자동으로 채운다:
-- "오늘까지" → `deadline: <오늘 날짜>`
+deadline은 제목에 명시적이거나("오늘 ~") 사용자가 직접 말한 경우만 채운다. **임의로 추론하지 않는다.**
+- "오늘까지" / "오늘 ~" → `deadline: <오늘 날짜>`
 - "급한" / "중요한" → `priority: high`
 
 ## Step 1: 리스트 이름 결정
@@ -46,14 +46,33 @@ ls ~/.claude/tasks/ | grep -v '^[0-9a-f]\{8\}-'
 
 ## Step 3: 생성
 
+**새 리스트인 경우**, 먼저 guard task(0.json)를 생성한다.
+이 태스크는 모든 태스크가 completed 되었을 때 Claude Code가 리스트 디렉토리를 자동 삭제하는 것을 방지한다.
+
 ```bash
 mkdir -p ~/.claude/tasks/<list-name>
 python3 -c "
 import json, os
 
 base = os.path.expanduser('~/.claude/tasks/<list-name>')
-# 기존 태스크 ID 이어서 번호 매기기
-existing = [int(f.split('.')[0]) for f in os.listdir(base) if f.endswith('.json')]
+
+# Guard task — 새 리스트일 때만 생성
+guard_path = os.path.join(base, '0.json')
+if not os.path.exists(guard_path):
+    guard = {
+        'id': '0',
+        'subject': 'Do Not Complete This Task',
+        'description': 'This is a guard task to prevent the task list from being auto-deleted when all other tasks are completed. Do NOT mark this task as completed.',
+        'status': 'pending',
+        'blocks': [],
+        'blockedBy': []
+    }
+    with open(guard_path, 'w') as f:
+        json.dump(guard, f, indent=2, ensure_ascii=False)
+    print('  ✓ 0. Guard task created')
+
+# 기존 태스크 ID 이어서 번호 매기기 (0은 guard이므로 제외)
+existing = [int(f.split('.')[0]) for f in os.listdir(base) if f.endswith('.json') and f != '0.json']
 next_id = max(existing) + 1 if existing else 1
 
 tasks = [
