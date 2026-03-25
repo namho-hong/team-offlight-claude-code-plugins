@@ -32,9 +32,9 @@
       "source": "./plugins/my-knowledge-base"
     },
     {
-      "name": "create-extension",
-      "description": "Guide for creating Claude Code extensions (skills, hooks, agents) in the right location",
-      "source": "./plugins/create-extension"
+      "name": "manage-skill",
+      "description": "Manage Claude Code extensions (skills, hooks, agents) — create, modify, rename, delete with deployment pipeline",
+      "source": "./plugins/manage-skill"
     },
     {
       "name": "tasklist",

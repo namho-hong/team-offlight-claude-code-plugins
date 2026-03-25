@@ -1,17 +1,18 @@
 ---
-name: create-extension
+name: manage-skill
 description: |
-  Claude Code 확장(skill, hook, agent) 관리 가이드.
-  신규 생성, 수정, 리네임, 삭제를 지원합니다.
-  Trigger: "/create-extension", "스킬 만들어", "훅 만들어", "에이전트 만들어",
+  Claude Code 확장(skill, hook, agent) 관리.
+  신규 생성, 수정, 리네임, 삭제 + 배포 파이프라인.
+  Trigger: "/manage-skill", "스킬 만들어", "훅 만들어", "에이전트 만들어",
   "확장 만들어", "확장 수정", "플러그인 리네임", "플러그인 리팩토링",
+  "스킬 수정", "스킬 삭제", "플러그인 삭제",
   "create skill", "create hook", "create agent",
   "rename plugin", "refactor plugin", "delete plugin"
 allowed-tools: AskUserQuestion, Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
 ---
 
-# Manage Extension
+# Manage Skill
 
 Claude Code 확장(skill, hook, agent)을 생성, 수정, 리네임, 삭제합니다.
 
@@ -43,7 +44,7 @@ rm -rf ~/claude-plugins/plugins/<old-name>/
 
 # 3. installed_plugins.json에서 구 항목 제거
 python3 -c "
-import json
+import json, os
 path = os.path.expanduser('~/.claude/plugins/installed_plugins.json')
 d = json.load(open(path))
 key = '<old-name>@team-offlight'
