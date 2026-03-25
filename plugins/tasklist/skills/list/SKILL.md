@@ -3,6 +3,7 @@ name: list
 description: |
   저장된 Task List 목록과 진행률을 조회합니다.
   Trigger: "/tasklist:list", "어떤 태스크 리스트 있어?", "태스크 리스트 목록"
+model: haiku
 allowed-tools:
   - Bash
 user-invocable: true
