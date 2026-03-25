@@ -1,8 +1,11 @@
 {
   "name": "tasklist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browse and load saved Claude Code Task Lists",
-  "author": { "name": "Team Offlight", "url": "https://github.com/offlightinc" },
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
   "repository": "https://github.com/offlightinc/claude-plugins",
   "license": "MIT"
 }
