@@ -152,9 +152,15 @@ git pull
 # 4. 플러그인 설치
 claude plugin install <name>@team-offlight
 
-# 5. 현재 세션에 반영
-# → 사용자에게 /reload-plugins 실행을 안내
+# 5. 현재 세션에 반영 — 자동화 불가, 반드시 안내
 ```
+
+Step 1~4는 Bash로 자동 실행한다. Step 5는 빌트인 CLI 명령어라 도구로 호출 불가.
+**모든 배치 유형에서, 배포 완료 후 반드시 사용자에게 다음을 말한다:**
+
+> `/reload-plugins` 를 입력하시면 현재 세션에 바로 반영됩니다.
+
+이 안내를 빠뜨리면 사용자가 "안 되는데?" 하게 된다. 반드시 말한다.
 
 **흔한 실패 원인:**
 - push 후 바로 install → 캐시 stale → **"Plugin not found"** → Step 3 누락
@@ -164,6 +170,7 @@ claude plugin install <name>@team-offlight
 
 - 파일 생성 즉시 사용 가능 (다음 세션 또는 `/reload-plugins`)
 - git commit은 팀 공유 목적으로 별도 수행
+- **배포 완료 후 `/reload-plugins` 안내 필수** (위와 동일)
 
 ### claude-code-kit
 
