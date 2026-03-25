@@ -140,7 +140,7 @@ tools:
    ```json
    {
      "name": "<name>",
-     "version": "1.0.0",
+     "version": "0.0.1",
      "description": "<설명>",
      "author": { "name": "Team Offlight", "url": "https://github.com/offlightinc" },
      "repository": "https://github.com/offlightinc/claude-plugins",
@@ -157,6 +157,29 @@ tools:
 - 마켓플레이스인 경우 marketplace.json에 등록되었는지 확인
 - claude-code-kit 훅인 경우 hookInstaller.ts에 등록되었는지 확인
 - MCP 의존이 있는데 마켓플레이스에 넣으려 한 건 아닌지 재확인
+
+## Step 4.5: 버전 범프 (마켓플레이스 플러그인만)
+
+수정 시 `plugin.json`의 `version` patch를 올린다:
+
+```bash
+# 예: 0.0.3 → 0.0.4
+cd ~/claude-plugins/plugins/<name>
+python3 -c "
+import json, pathlib
+p = pathlib.Path('.claude-plugin/plugin.json')
+d = json.loads(p.read_text())
+parts = d['version'].split('.')
+parts[2] = str(int(parts[2]) + 1)
+d['version'] = '.'.join(parts)
+p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + '\n')
+print(f'version: {d[\"version\"]}')
+"
+```
+
+- 신규 생성 시 초기 버전: `0.0.1`
+- 수정할 때마다 patch +1 (자동)
+- major/minor 변경은 사용자가 수동으로 결정
 
 ## Step 5: 배포 & 활성화
 
