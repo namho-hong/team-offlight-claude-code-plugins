@@ -6,13 +6,13 @@
   "repository": "https://github.com/offlightinc/claude-plugins",
   "license": "MIT",
   "hooks": {
-    "PostToolUse": [
+    "PreToolUse": [
       {
         "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/plugin-deploy-reminder.sh"
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/extension-guard.sh"
           }
         ]
       }

@@ -16,6 +16,16 @@ user-invocable: true
 
 Claude Code 확장(skill, hook, agent)을 생성, 수정, 리네임, 삭제합니다.
 
+## Step 0: 가드 해제
+
+확장 파일 수정 전에 반드시 실행한다. PreToolUse 훅이 확장 파일 Edit/Write를 차단하므로, 락 파일로 우회한다.
+
+```bash
+touch /tmp/manage-skill-active
+```
+
+**작업 완료 후 반드시 Step 6에서 해제한다.**
+
 ## Step 1: 작업 유형 확인
 
 사용자의 의도를 파악한다. 대화 맥락에서 명확하면 질문 없이 진행.
@@ -209,9 +219,18 @@ Step 5 완료 후 **반드시** 사용자에게 말한다:
 - 앱 빌드 후 hookInstaller 자동 설치
 - 개발 중에는 수동으로 `~/.claude/`에 복사하여 테스트
 
+## Step 6: 가드 복원
+
+작업 완료 후 반드시 실행:
+
+```bash
+rm -f /tmp/manage-skill-active
+```
+
 ## 금지 사항
 
 - MCP 의존 있는 확장을 마켓플레이스에 넣지 않는다
 - 글로벌 `~/.claude/skills/`에 직접 생성하지 않는다
 - hookInstaller에 등록하지 않고 claude-code-kit 훅만 파일로 넣지 않는다
 - installed_plugins.json이나 settings.json을 수동 편집하지 않는다 — `claude plugin install/uninstall` 사용
+- 플러그인 훅을 hooks/ 디렉토리에만 넣고 plugin.json에 등록하지 않는다
