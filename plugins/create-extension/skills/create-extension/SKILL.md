@@ -1,23 +1,65 @@
 ---
 name: create-extension
 description: |
-  Claude Code 확장(skill, hook, agent) 생성 가이드.
-  올바른 배치 위치를 판단하고 파일을 생성합니다.
+  Claude Code 확장(skill, hook, agent) 관리 가이드.
+  신규 생성, 수정, 리네임, 삭제를 지원합니다.
   Trigger: "/create-extension", "스킬 만들어", "훅 만들어", "에이전트 만들어",
-  "확장 만들어", "create skill", "create hook", "create agent"
+  "확장 만들어", "확장 수정", "플러그인 리네임", "플러그인 리팩토링",
+  "create skill", "create hook", "create agent",
+  "rename plugin", "refactor plugin", "delete plugin"
 allowed-tools: AskUserQuestion, Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
 ---
 
-# Create Extension
+# Manage Extension
 
-Claude Code 확장(skill, hook, agent)을 올바른 위치에 생성합니다.
+Claude Code 확장(skill, hook, agent)을 생성, 수정, 리네임, 삭제합니다.
 
-## Step 1: 무엇을 만드는지 확인
+## Step 1: 작업 유형 확인
 
-사용자에게 질문:
-- 무엇을 만드려는가? (skill / hook / agent)
-- 어떤 기능을 하는가? (한 줄 설명)
+사용자의 의도를 파악한다. 대화 맥락에서 명확하면 질문 없이 진행.
+
+| 작업 | 분기 |
+|------|------|
+| **신규 생성** | Step 2 → 3 → 4 → 5 |
+| **기존 수정** (스킬 내용 변경, 스킬 추가 등) | Step 3 (수정) → 4 → 5 (업데이트 파이프라인) |
+| **리네임/리팩토링** (플러그인명 변경, 스킬 분리 등) | Step 1.5 → 2 → 3 → 4 → 5 + 정리 |
+| **삭제** | Step 1.5 (정리만) |
+
+확인할 것:
+- 확장 유형 (skill / hook / agent)
+- 기능 설명 (한 줄)
+
+## Step 1.5: 구 확장 정리 (리네임/삭제 시)
+
+마켓플레이스 플러그인인 경우, **반드시 모두 수행**:
+
+```bash
+# 1. 소스 삭제
+rm -rf ~/claude-plugins/plugins/<old-name>/
+
+# 2. marketplace.json에서 구 항목 제거
+# (Edit 도구로 수행)
+
+# 3. installed_plugins.json에서 구 항목 제거
+python3 -c "
+import json
+path = os.path.expanduser('~/.claude/plugins/installed_plugins.json')
+d = json.load(open(path))
+key = '<old-name>@team-offlight'
+if key in d['plugins']:
+    del d['plugins'][key]
+    json.dump(d, open(path, 'w'), indent=2, ensure_ascii=False)
+    print(f'{key} 제거 완료')
+"
+
+# 4. 캐시 디렉토리 제거
+rm -rf ~/.claude/plugins/cache/team-offlight/<old-name>/
+```
+
+프로젝트 `.claude/` 확장인 경우: 파일 삭제 + settings.json 훅 등록 해제.
+
+삭제만이면 여기서 끝. 리네임이면 Step 2로 계속 진행.
 
 ## Step 2: 배치 위치 판단
 
