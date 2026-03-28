@@ -142,7 +142,7 @@ FOCUS_SCRIPT=$(build_focus_script "$TARGET_TTY" "$TARGET_CWD")
 if command -v terminal-notifier &>/dev/null && [[ -n "$FOCUS_SCRIPT" ]]; then
   # terminal-notifier: 알림 클릭 시 탭 포커스
   # -execute에 전달할 스크립트를 임시 파일로 저장 (복잡한 AppleScript를 인라인으로 넣기 어려움)
-  FOCUS_SCRIPT_FILE=$(mktemp /tmp/notify-focus-XXXXXX.sh)
+  FOCUS_SCRIPT_FILE=$(mktemp /tmp/notify-focus-XXXXXX)
   echo '#!/bin/bash' > "$FOCUS_SCRIPT_FILE"
   echo "osascript <<'EOFSCRIPT'" >> "$FOCUS_SCRIPT_FILE"
   echo "$FOCUS_SCRIPT" >> "$FOCUS_SCRIPT_FILE"
