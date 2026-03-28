@@ -1,0 +1,24 @@
+{
+  "name": "notify-on-stop",
+  "version": "0.0.1",
+  "description": "Show a macOS notification when Claude stops responding",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/namho-hong"
+  },
+  "repository": "https://github.com/namho-hong/team-offlight-claude-code-plugins",
+  "license": "MIT",
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/notify-on-stop.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
