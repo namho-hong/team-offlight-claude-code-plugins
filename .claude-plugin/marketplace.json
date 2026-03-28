@@ -40,6 +40,11 @@
       "name": "tasklist",
       "description": "Browse and load saved Claude Code Task Lists",
       "source": "./plugins/tasklist"
+    },
+    {
+      "name": "sound-on-stop",
+      "description": "Play a system sound when Claude stops responding",
+      "source": "./plugins/sound-on-stop"
     }
   ]
 }

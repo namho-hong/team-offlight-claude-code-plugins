@@ -1,0 +1,24 @@
+{
+  "name": "sound-on-stop",
+  "version": "0.0.1",
+  "description": "Play a system sound when Claude stops responding",
+  "author": {
+    "name": "Team Offlight",
+    "url": "https://github.com/offlightinc"
+  },
+  "repository": "https://github.com/offlightinc/claude-plugins",
+  "license": "MIT",
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/sound-on-stop.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
