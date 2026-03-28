@@ -74,27 +74,39 @@ rm -rf ~/claude-plugins/plugins/<old-name>/
 
 삭제만이면 여기서 끝. 리네임이면 Step 2로 계속.
 
-## Step 2: 배치 위치 판단
+## Step 2: 배치 위치 판단 (인터뷰)
 
-```
-Conclave 관련인가? (mcp__conclave-dev__*, CONCLAVE_TERMINAL, Conclave 앱 기능)
-│
-├─ NO → 마켓플레이스 (team-offlight)
-│        위치: ~/claude-plugins/plugins/<name>/
-│        scope: user (글로벌 — 모든 프로젝트에서 사용 가능)
-│
-└─ YES → 누구를 위한 건가?
-          │
-          ├─ 앱 사용자 → claude-code-kit (앱 내장)
-          │   위치: apps/desktop/resources/claude-code-kit/
-          │   훅은 hookInstaller.ts HOOK_CONFIGS에 등록 필수
-          │   모든 훅에 CONCLAVE_TERMINAL 가드 필수
-          │
-          └─ 개발팀 → 프로젝트 .claude/
-              위치: .claude/skills/, .claude/hooks/, .claude/agents/
-```
+**혼자 판단하지 않는다.** 반드시 사용자에게 질문하여 확인받는다.
 
-판단 결과를 사용자에게 보고하고 확인받는다.
+### 2-1. 질의응답
+
+사용자에게 다음을 물어본다 (대화 맥락에서 이미 답이 나온 항목은 생략 가능):
+
+1. **"이 확장이 Conclave(MCP, CONCLAVE_TERMINAL 등)에 의존하나요?"**
+   - YES → 질문 2로
+   - NO → 마켓플레이스 (team-offlight) 확정 → 2-2로
+2. **(Conclave 관련인 경우) "앱 사용자용인가요, 개발팀 내부용인가요?"**
+   - 앱 사용자 → claude-code-kit
+   - 개발팀 → 프로젝트 .claude/
+
+### 2-2. 판단 결과 제시 + 확인
+
+질의응답 결과를 바탕으로, 아래 형식으로 배치 위치를 제시하고 **명시적 확인을 받는다:**
+
+> **배치 위치:** `<위치 경로>`
+> **이유:** `<판단 근거 한 줄>`
+>
+> 이대로 진행할까요?
+
+사용자가 OK하면 Step 3으로 진행. 아니면 사용자 의견에 따라 조정.
+
+### 배치 위치 레퍼런스
+
+| 조건 | 위치 | 비고 |
+|------|------|------|
+| Conclave 무관 | `~/claude-plugins/plugins/<name>/` | 마켓플레이스 (team-offlight), 글로벌 scope |
+| Conclave 관련 + 앱 사용자 | `apps/desktop/resources/claude-code-kit/` | hookInstaller.ts 등록 필수, CONCLAVE_TERMINAL 가드 필수 |
+| Conclave 관련 + 개발팀 | `.claude/skills/`, `.claude/hooks/`, `.claude/agents/` | 프로젝트 scope |
 
 ## Step 3: 생성/수정
 
