@@ -1,6 +1,6 @@
 {
   "name": "manage-skill",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Manage Claude Code extensions (skills, hooks, agents) — create, modify, rename, delete with deployment pipeline",
   "author": {
     "name": "Team Offlight",
