@@ -143,7 +143,10 @@ FOCUS_SCRIPT=$(build_focus_script "$TARGET_TTY" "$TARGET_CWD")
 
 # --- 알림 전송 ---
 # osascript 알림은 항상 보냄 (안정적)
-osascript -e "display notification \"$BODY\" with title \"Claude Code\"" &
+# heredoc으로 전달해야 한국어 인코딩이 깨지지 않음
+osascript <<NOTIFICATION &
+display notification "$BODY" with title "Claude Code"
+NOTIFICATION
 
 # terminal-notifier는 추가로 보냄 (클릭 시 탭 포커스 기능)
 if command -v terminal-notifier &>/dev/null && [[ -n "$FOCUS_SCRIPT" ]]; then
