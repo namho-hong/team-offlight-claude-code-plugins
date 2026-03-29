@@ -225,6 +225,7 @@ slug는 태스크 설명을 기반으로 영문 kebab-case로 자동 생성.
 2. Check current Phase and last Iteration Log entry
 3. Run verification commands to assess current state
 4. If errors exist → fix first. If clean → proceed to next work
+5. When ALL Done Criteria are met, output: `<promise>DONE</promise>` (Ralph Loop의 stop hook은 이 태그만 감지함)
 
 ## Failure Rules
 - Same error 3 times → log current approach in Iteration Log, switch strategy
