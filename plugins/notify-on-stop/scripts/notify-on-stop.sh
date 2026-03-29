@@ -167,7 +167,7 @@ if command -v terminal-notifier &>/dev/null && [[ -n "$FOCUS_SCRIPT" ]]; then
     -message "$BODY" \
     -title "Claude Code" \
     -sender "$BUNDLE_ID" \
-    -execute "$FOCUS_SCRIPT_FILE" </dev/null >/dev/null 2>&1 &
+    -execute "bash $FOCUS_SCRIPT_FILE" </dev/null >/dev/null 2>&1 &
   disown
 fi
 
