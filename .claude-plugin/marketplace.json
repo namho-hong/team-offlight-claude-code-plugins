@@ -53,7 +53,7 @@
     },
     {
       "name": "ralph-plan",
-      "description": "Ralph Loop brief generator — interview-driven task planning with machine-verifiable done criteria",
+      "description": "Ralph Loop brief generator with built-in loop engine — interview-driven task planning with machine-verifiable done criteria",
       "source": "./plugins/ralph-plan"
     }
   ]
