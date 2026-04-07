@@ -1,7 +1,7 @@
 {
   "name": "ralph-plan",
-  "version": "0.0.3",
-  "description": "Ralph Loop brief generator — interview-driven task planning with machine-verifiable done criteria",
+  "version": "0.1.0",
+  "description": "Ralph Loop brief generator with built-in loop engine — interview-driven task planning with machine-verifiable done criteria",
   "author": {
     "name": "Team Offlight",
     "url": "https://github.com/namho-hong"

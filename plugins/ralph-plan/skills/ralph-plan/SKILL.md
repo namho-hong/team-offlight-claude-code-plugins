@@ -8,7 +8,7 @@ user-invocable: true
 
 # Ralph Plan — Brief Generator for Ralph Loop
 
-유저의 태스크 `$ARGUMENTS`를 인터뷰하고, 구멍 없는 brief 문서를 생성하여 `/ralph-loop`에 주입하는 스킬.
+유저의 태스크 `$ARGUMENTS`를 인터뷰하고, 구멍 없는 brief 문서를 생성하여 `/ralph-loop:ralph-loop`에 주입하는 스킬.
 
 `$ARGUMENTS`가 비어있으면 Phase 1에서 태스크 설명을 질문한다.
 
@@ -225,7 +225,7 @@ slug는 태스크 설명을 기반으로 영문 kebab-case로 자동 생성.
 2. Check current Phase and last Iteration Log entry
 3. Run verification commands to assess current state
 4. If errors exist → fix first. If clean → proceed to next work
-5. When ALL Done Criteria are met, output: `<promise>DONE</promise>` (Ralph Loop의 stop hook은 이 태그만 감지함)
+5. When ALL Done Criteria are met, output: `<promise>DONE</promise>` as your FINAL output. Do NOT output any additional text, tool calls, summaries, or TaskUpdate after the promise tag. The stop hook only checks the LAST text block — anything after the tag will prevent detection.
 
 ## Failure Rules
 - Same error 3 times → log current approach in Iteration Log, switch strategy
@@ -241,14 +241,52 @@ slug는 태스크 설명을 기반으로 영문 kebab-case로 자동 생성.
 ## Phase 5: 확인 및 실행
 
 1. 생성된 brief를 유저에게 보여준다
-2. 수정 요청이 있으면 반영한다
-3. 확정되면 아래 명령어를 제시하고, 유저 확인 후 실행:
+2. AskUserQuestion으로 다음 선택지를 제시한다:
 
-```bash
-/ralph-loop "Read .claude/ralph-brief-{slug}.md and follow the instructions. Record each iteration in the Iteration Log section." --max-iterations {유형별 적절한 수} --completion-promise "DONE"
+```
+Brief가 완성되었습니다.
+
+A. 바로 Ralph Loop 실행
+B. Brief 수정 후 실행
 ```
 
-max-iterations 기본값:
+3. **B 선택 시**: 수정 요청을 반영한 후 다시 선택지를 제시한다.
+
+4. **A 선택 시**: Write 도구로 `.claude/ralph-loop.local.md` state 파일을 직접 생성하여 루프를 활성화한다.
+
+### State 파일 생성 방법
+
+Write 도구로 `.claude/ralph-loop.local.md`를 아래 형식으로 생성:
+
+```markdown
+---
+active: true
+iteration: 1
+session_id: (현재 세션 ID — 알 수 없으면 빈 문자열)
+max_iterations: {유형별 기본값}
+completion_promise: "DONE"
+started_at: "{현재 UTC 시각 ISO 8601}"
+---
+
+Read .claude/ralph-brief-{slug}.md and follow the instructions. Record each iteration in the Iteration Log section.
+```
+
+생성 후 아래 활성화 메시지를 출력한다:
+
+```
+🔄 Ralph Loop가 활성화되었습니다!
+
+Iteration: 1
+Max iterations: {설정값}
+Completion promise: DONE
+Brief: .claude/ralph-brief-{slug}.md
+
+Stop hook이 루프를 제어합니다.
+```
+
+그리고 즉시 brief의 지시사항에 따라 작업을 시작한다.
+
+### max-iterations 기본값
 - A. 간단한 버그 픽스: 15
 - B. 새 기능 개발: 40
 - C. 반복 실패 중인 버그: 25
